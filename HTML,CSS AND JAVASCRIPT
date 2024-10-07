@@ -1,0 +1,1491 @@
+HTML CODE-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Order Form</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Restaurant Order Form</h1>
+  <form id="orderForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="table">Table Number:</label>
+    <input type="number" id="table" name="table" required>
+
+    <label for="menu">Menu Item:</label>
+    <select id="menu" name="menu" required>
+      <option value="burger">Burger</option>
+      <option value="pizza">Pizza</option>
+      <option value="pasta">Pasta</option>
+    </select>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" min="1" required>
+
+    <button type="submit">Submit Order</button>
+  </form>
+
+  <div id="orderStatus"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Restaurant Management System</h1>
+        <nav>
+            <ul>
+                <li><a href="#order-management">Order Management</a></li>
+                <li><a href="#menu-management">Menu Management</a></li>
+                <li><a href="#staff-management">Staff Management</a></li>
+                <li><a href="#billing">Billing & Payment</a></li>
+                <li><a href="#feedback">Customer Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Order Management Section -->
+    <section id="order-management">
+        <h2>Order Management</h2>
+        <div>
+            <label>Customer Name: <input type="text" id="customerName"></label>
+            <label>Order Type: 
+                <select id="orderType">
+                    <option value="dine-in">Dine-in</option>
+                    <option value="take-out">Take-out</option>
+                    <option value="delivery">Delivery</option>
+                </select>
+            </label>
+            <label>Order Items:</label>
+            <select id="menuItems" multiple>
+                <option value="pizza">Pizza</option>
+                <option value="burger">Burger</option>
+                <option value="pasta">Pasta</option>
+                <option value="sandwich">Sandwich</option>
+                <option value="juice">Juice</option>
+                <option value="hotdog">Hot Dogs</option>
+                <option value="chicken">Chicken</option>
+                <option value="eggs">Eggs</option>
+                <option value="paneer">Paneer</option>
+                <option value="chhola">Chhola</option>
+                <option value="cold-drink">Cold Drink</option>
+                <option value="coffee">Coffee</option>
+                <option value="cold-coffee">Cold Coffee</option>
+            </select>
+            <button onclick="placeOrder()">Place Order</button>
+        </div>
+        <div id="orderSummary"></div>
+    </section>
+
+    <!-- Menu Management Section -->
+    <section id="menu-management">
+        <h2>Menu Management</h2>
+        <div>
+            <h3>Add Menu Item</h3>
+            <label>Item Name: <input type="text" id="menuItemName"></label>
+            <label>Price: <input type="number" id="menuItemPrice"></label>
+            <button onclick="addMenuItem()">Add Item</button>
+        </div>
+        <h3>Current Menu</h3>
+        <ul id="menuList">
+            <li>Pizza - $10</li>
+            <li>Burger - $7</li>
+            <li>Pasta - $8</li>
+            <!-- Add more menu items here -->
+        </ul>
+    </section>
+
+    <!-- Staff Management Section -->
+    <section id="staff-management">
+        <h2>Staff Management</h2>
+        <div>
+            <h3>Add Staff Member</h3>
+            <label>Name: <input type="text" id="staffName"></label>
+            <label>Role: 
+                <select id="staffRole">
+                    <option value="server">Server</option>
+                    <option value="chef">Chef</option>
+                    <option value="manager">Manager</option>
+                </select>
+            </label>
+            <button onclick="addStaff()">Add Staff</button>
+        </div>
+        <h3>Staff List</h3>
+        <ul id="staffList">
+            <li>John - Server</li>
+            <li>Mary - Chef</li>
+            <!-- Add more staff here -->
+        </ul>
+    </section>
+
+    <!-- Billing and Payment Integration Section -->
+    <section id="billing">
+        <h2>Billing and Payment</h2>
+        <div>
+            <label>Order ID: <input type="text" id="orderID"></label>
+            <label>Amount: <input type="number" id="orderAmount"></label>
+            <label>Payment Method: 
+                <select id="paymentMethod">
+                    <option value="credit-card">Credit Card</option>
+                    <option value="mobile-wallet">Mobile Wallet</option>
+                    <option value="cash">Cash</option>
+                </select>
+            </label>
+            <button onclick="processPayment()">Process Payment</button>
+        </div>
+        <div id="paymentStatus"></div>
+    </section>
+
+    <!-- Customer Feedback Section -->
+    <section id="feedback">
+        <h2>Customer Feedback</h2>
+        <div>
+            <label>Name: <input type="text" id="feedbackName"></label>
+            <label>Feedback: <textarea id="feedbackMessage"></textarea></label>
+            <button onclick="submitFeedback()">Submit Feedback</button>
+        </div>
+        <div id="feedbackList">
+            <h3>Recent Feedback:</h3>
+            <p>John: Great Service!</p>
+            <p>Jane: Delicious Food!</p>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<div class="welcome-message">
+    <h2>Welcome to Our Restaurant Management Platform!</h2>
+    <p>We are thrilled to have you here. Manage your restaurant efficiently, and thank you for choosing us!</p>
+</div>
+<div class="chatbot-container">
+    <h3>Chat with Manager Neha</h3>
+    <div class="chat-window">
+        <div id="chat-output"></div>
+        <input type="text" id="chat-input" placeholder="Ask Neha anything..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+<div class="discount-section">
+    <h2>Special Discount Offers</h2>
+    <div class="discount">
+        <p>Get 20% OFF on all Pizzas! Use code: <strong>PIZZA20</strong></p>
+        <p>Flat 15% OFF on orders above ₹500! Use code: <strong>BIG15</strong></p>
+    </div>
+</div>
+<div class="delivery-platforms">
+    <h2>Connected Delivery Platforms</h2>
+    <ul>
+        <li>Zomato - API Connected</li>
+        <li>Swiggy - API Connected</li>
+        <li>Zepto - API Connected</li>
+    </ul>
+</div>
+<div class="order-management">
+    <h2>Order Management Dashboard</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Status</th>
+                <th>Amount</th>
+                <th>Delivery Partner</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>#1001</td>
+                <td>John Doe</td>
+                <td>Preparing</td>
+                <td>₹450</td>
+                <td>Zomato</td>
+            </tr>
+            <tr>
+                <td>#1002</td>
+                <td>Jane Smith</td>
+                <td>Delivered</td>
+                <td>₹780</td>
+                <td>Swiggy</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="menu-items">
+    <h2>Top Menu Items</h2>
+    <div class="item" id="item1">
+        <img src="path_to_image/pizza.jpg" alt="Pizza">
+        <p>Pizza</p>
+        <p>Price: ₹250</p>
+        <button onclick="addToCart('Pizza', 250)">Add to Cart</button>
+    </div>
+    <div class="item" id="item2">
+        <img src="path_to_image/burger.jpg" alt="Burger">
+        <p>Burger</p>
+        <p>Price: ₹150</p>
+        <button onclick="addToCart('Burger', 150)">Add to Cart</button>
+    </div>
+    <!-- Add more items up to 50 as needed -->
+</div>
+<div class="cart">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <p>Total: ₹<span id="total-price">0</span></p>
+    <button onclick="checkout()">Checkout</button>
+</div>
+<div class="Team">
+  <h2>Our Team</h2>
+  <ul>
+    <li>Founder and CEO- Shagun Pandey</li>
+    <li>Co-founder and manager- Neha chauhan</li>
+    <li>Co-founder and manager - Sweccha agnihotri</li>
+    <li> Co-founder and CFO- Shubh srivastav</li>
+    <li>Co-founder and CTO- Aman singh</li>
+</div>
+<div class="restaurant-pictures">
+    <h2>Our Restaurant</h2>
+    <img src="path_to_image/restaurant1.jpg" alt="Restaurant">
+    <img src="path_to_image/restaurant2.jpg" alt="Restaurant">
+</div>
+<div class="contact">
+    <h2>Contact Us</h2>
+    <p>Pushkar Singh - Contact: 7355364091</p>
+    <p>Neha Chauhan - Support: 8506949906</p>
+    <p>Email: ps9935542@gmail.com</p>
+</div>
+<div class="arrival-time">
+    <h2>Estimate Your Arrival Time</h2>
+    <input type="text" id="user-location" placeholder="Enter your location">
+    <button onclick="calculateTime()">Calculate Time</button>
+    <p id="time-output"></p>
+</div>
+<div class="payment-methods">
+    <h2>Payment Options</h2>
+    <button onclick="pay('PhonePe')">PhonePe</button>
+    <button onclick="pay('Paytm')">Paytm</button>
+    <button onclick="pay('UPI')">UPI</button>
+</div>
+<div class="order-container">
+  <h2>Place Your Order</h2>
+  <button onclick="placeOrder()">Order Now</button>
+</div>
+
+<script>
+  async function placeOrder() {
+    try {
+      const orderDetails = {
+        items: ["Pizza", "Pasta"],
+        totalAmount: 500
+      };
+
+      const response = await fetch('http://localhost:3000/place-order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderDetails)
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert('Order placed successfully!');
+      } else {
+        alert('Order failed. Please try again.');
+      }
+    } catch (error) {
+      alert('An error occurred: ' + error.message);
+    }
+  }
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Welcome to Our Restaurant</h1>
+    </header>
+
+    <!-- Main Section -->
+    <div class="container">
+
+        <!-- Menu Section -->
+        <section class="menu-section">
+            <h2>Our Menu</h2>
+            <div class="menu-items">
+                <div class="item">
+                    <img src="path-to-your-first-image.jpg" alt="Dish">
+                    <p>Special Dish</p>
+                    <p>Price: ₹250</p>
+                    <button onclick="addToCart('Special Dish', 250)">Add to Cart</button>
+                </div>
+
+                <div class="item">
+                    <img src="path-to-your-second-image.jpg" alt="Dish">
+                    <p>Veg Platter</p>
+                    <p>Price: ₹300</p>
+                    <button onclick="addToCart('Veg Platter', 300)">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Restaurant Photos Section -->
+        <section class="restaurant-photos">
+            <h2>Our Restaurant</h2>
+            <div class="photos">
+                <img src="path-to-restaurant-image.jpg" alt="Restaurant Image 1">
+                <img src="path-to-second-restaurant-image.jpg" alt="Restaurant Image 2">
+            </div>
+        </section>
+
+        <!-- Cart Section -->
+        <section class="cart-section">
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+            <p>Total: ₹<span id="total-price">0</span></p>
+            <button onclick="checkout()">Checkout</button>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Uploaded Images</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            padding: 20px;
+        }
+        .image-wrapper {
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #333;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Uploaded Images</h1>
+
+        <div class="image-wrapper">
+            <h2>Screenshot 1</h2>
+            <img src="path-to-image/Screenshot_1.png" alt="Screenshot 1">
+        </div>
+
+        <div class="image-wrapper">
+            <h2>Screenshot 2</h2>
+            <img src="path-to-image/Screenshot_2.png" alt="Screenshot 2">
+        </div>
+
+        <div class="image-wrapper">
+            <h2>Screenshot 3</h2>
+            <img src="path-to-image/Screenshot_3.png" alt="Screenshot 3">
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+CSS CODE- 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+#orderStatus {
+  text-align: center;
+  margin-top: 20px;
+  color: green;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+section {
+    background-color: white;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Header Section */
+header {
+    background: linear-gradient(45deg, #ff7e5f, #feb47b); /* Orange gradient */
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2.5em;
+    letter-spacing: 2px;
+}
+
+/* Navigation Menu */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #feb47b;
+}
+
+/* Sections */
+section {
+    margin: 40px auto;
+    padding: 30px;
+    max-width: 1000px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+section:hover {
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+h2:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 50px;
+    height: 3px;
+    background-color: #ff7e5f;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #ff7e5f;
+}
+
+/* Button Styles */
+button {
+    display: inline-block;
+    background-color: #ff7e5f;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #feb47b;
+}
+
+/* Order Summary Section */
+#orderSummary {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 2px solid #ff7e5f;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Menu List Styles */
+#menuList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menuList li {
+    background-color: #f4f4f4;
+    padding: 10px;
+    margin: 10px 0;
+    border-left: 5px solid #feb47b;
+    border-radius: 5px;
+    transition: transform 0.3s;
+}
+
+#menuList li:hover {
+    transform: translateX(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Staff List Styles */
+#staffList {
+    list-style: none;
+    padding: 0;
+}
+
+#staffList li {
+    background-color: #fff3e0; /* Light orange */
+    padding: 10px;
+    margin: 10px 0;
+    border-left: 5px solid #ffa726; /* Accent color */
+    border-radius: 5px;
+    transition: transform 0.3s;
+}
+
+#staffList li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Payment Status Section */
+#paymentStatus {
+    margin-top: 20px;
+    background-color: #e0f7fa; /* Light blue */
+    padding: 20px;
+    border: 2px solid #26c6da; /* Blue accent */
+    border-radius: 10px;
+    color: #00796b;
+    font-weight: bold;
+}
+
+/* Feedback Section */
+#feedbackList {
+    margin-top: 20px;
+}
+
+#feedbackList p {
+    background-color: #fffde7; /* Light yellow */
+    padding: 10px;
+    border-left: 5px solid #fdd835; /* Yellow accent */
+    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    nav ul li {
+        margin: 0 10px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        background-color: #ff7e5f;
+        padding: 20px;
+    }
+
+    nav ul li a {
+        padding: 15px;
+    }
+
+    section {
+        padding: 20px;
+    }
+}
+.welcome-message {
+    background-color: #e0f7fa;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 20px;
+    color: #00796b;
+}
+
+.welcome-message h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.welcome-message p {
+    font-size: 1.2em;
+}
+.chatbot-container {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+    max-width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-window {
+    border: 2px solid #00796b;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#chat-output {
+    height: 150px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#chat-input {
+    width: calc(100% - 60px);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px;
+    background-color: #ff7e5f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #feb47b;
+}
+.discount-section {
+    background-color: #fffde7;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    text-align: center;
+    color: #fdd835;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.discount-section h2 {
+    margin-bottom: 10px;
+}
+
+.discount p {
+    font-size: 1.2em;
+    margin: 5px 0;
+    color: #333;
+}
+.delivery-platforms {
+    background-color: #e0f7fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.delivery-platforms h2 {
+    margin-bottom: 10px;
+}
+
+.delivery-platforms ul {
+    list-style: none;
+    padding: 0;
+}
+
+.delivery-platforms ul li {
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px 0;
+    border-left: 5px solid #26c6da;
+    border-radius: 5px;
+}
+.order-management {
+    margin-top: 40px;
+}
+
+.order-management h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+thead {
+    background-color: #ff7e5f;
+    color: white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.menu-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.item {
+    width: 200px;
+    text-align: center;
+    margin: 15px;
+}
+
+.item img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+}
+
+.item button {
+    background-color: #ff7e5f;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.item button:hover {
+    background-color: #feb47b;
+}
+.staff-management {
+    background-color: #e0f7fa;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+.restaurant-pictures {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.restaurant-pictures img {
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+}
+.contact {
+    background-color: #fff3e0;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+.payment-methods button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.payment-methods button:hover {
+    background-color: #45a049;
+}
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+/* Main Container */
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+/* Menu Section */
+.menu-section {
+    text-align: center;
+}
+
+.menu-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.menu-items {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.item {
+    width: 300px;
+    background-color: white;
+    margin: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.item p {
+    margin: 10px 0;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Restaurant Photos */
+.restaurant-photos {
+    margin: 40px 0;
+    text-align: center;
+}
+
+.restaurant-photos h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.photos {
+    display: flex;
+    justify-content: center;
+}
+
+.photos img {
+    width: 400px;
+    height: 300px;
+    margin: 0 20px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Cart Section */
+.cart-section {
+    text-align: center;
+    margin-top: 40px;
+}
+
+#cart-items {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.cart-section button {
+    margin-top: 20px;
+    padding: 10px 30px;
+    font-size: 18px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cart-section button:hover {
+    background-color: #0056b3;
+}
+
+JAVASCRIPT CODE-
+document.getElementById('orderForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value;
+  const table = document.getElementById('table').value;
+  const menu = document.getElementById('menu').value;
+  const quantity = document.getElementById('quantity').value;
+
+  // For now, just show a confirmation message
+  document.getElementById('orderStatus').textContent = 
+    `Order placed: ${quantity}x ${menu} for Table ${table}. Thank you, ${name}!`;
+
+  // TODO: Send data to backend (API or server)
+});
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
+let orders = [];
+
+app.post('/order', (req, res) => {
+  const { name, table, menu, quantity } = req.body;
+  const order = { name, table, menu, quantity, status: 'Pending' };
+  orders.push(order);
+  res.status(201).json({ message: 'Order placed successfully!', order });
+});
+
+app.get('/orders', (req, res) => {
+  res.json(orders);
+});
+
+const PORT = 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+CREATE TABLE Orders (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  customer_name VARCHAR(255) NOT NULL,
+  table_number INT NOT NULL,
+  menu_item VARCHAR(255) NOT NULL,
+  quantity INT NOT NULL,
+  status VARCHAR(50) DEFAULT 'Pending'
+);
+// Order Management
+function placeOrder() {
+    const customerName = document.getElementById('customerName').value;
+    const orderType = document.getElementById('orderType').value;
+    const selectedItems = Array.from(document.getElementById('menuItems').selectedOptions).map(option => option.text);
+    
+    const orderSummary = `
+        Order for ${customerName} (${orderType})
+        Items: ${selectedItems.join(', ')}
+    `;
+    
+    document.getElementById('orderSummary').innerText = orderSummary;
+}
+
+// Menu Management
+function addMenuItem() {
+    const itemName = document.getElementById('menuItemName').value;
+    const itemPrice = document.getElementById('menuItemPrice').value;
+    
+    const menuList = document.getElementById('menuList');
+    const newItem = document.createElement('li');
+    newItem.innerText = `${itemName} - $${itemPrice}`;
+    
+    menuList.appendChild(newItem);
+}
+
+// Staff Management
+function addStaff() {
+    const staffName = document.getElementById('staffName').value;
+    const staffRole = document.getElementById('staffRole').value;
+    
+    const staffList = document.getElementById('staffList');
+    const newStaff = document.createElement('li');
+    newStaff.innerText = `${staffName} - ${staffRole}`;
+    
+    staffList.appendChild(newStaff);
+}
+
+// Billing and Payment
+function processPayment() {
+    const orderID = document.get
+function sendMessage() {
+    const input = document.getElementById('chat-input').value;
+    const output = document.getElementById('chat-output');
+
+    if (input.trim() !== '') {
+        const userMessage = `<p><strong>You:</strong> ${input}</p>`;
+        output.innerHTML += userMessage;
+        document.getElementById('chat-input').value = '';
+
+        setTimeout(function() {
+            const response = `<p><strong>Neha (Manager):</strong> I'm here to help! How can I assist you with your orders or staff management?</p>`;
+            output.innerHTML += response;
+        }, 1000);
+    }
+}
+let cart = [];
+let totalPrice = 0;
+
+function addToCart(item, price) {
+    cart.push({ item, price });
+    totalPrice += price;
+    updateCart();
+}
+
+function updateCart() {
+    let cartItems = document.getElementById('cart-items');
+    cartItems.innerHTML = '';
+    cart.forEach(function (product) {
+        cartItems.innerHTML += `<p>${product.item}: ₹${product.price}</p>`;
+    });
+    document.getElementById('total-price').innerText = totalPrice;
+}
+
+function checkout() {
+    alert("Checkout complete! Your total is ₹" + totalPrice);
+}
+function calculateTime() {
+    let userLocation = document.getElementById('user-location').value;
+    if (userLocation) {
+        document.getElementById('time-output').innerText = "Estimated time: 15 minutes";
+    } else {
+        alert("Please enter your location.");
+    }
+}
+function pay(method) {
+    alert(method + " Payment successful!");
+}
+function fetchZomatoData() {
+    // Fetch Zomato data
+    fetch("https://developers.zomato.com/api/v2.1/categories", {
+        method: "GET",
+        headers: {
+            "user-key": "your_api_key_here"
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => console.error('Error:', error));
+}
+function checkout() {
+    try {
+        if (cart.length === 0) {
+            throw new Error("Cart is empty! Add items to the cart before checkout.");
+        }
+        alert("Checkout complete! Your total is ₹" + totalPrice);
+    } catch (error) {
+        alert(error.message);
+    }
+}
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+
+// Middleware
+app.use(bodyParser.json());
+
+// Endpoint to place the order
+app.post('/place-order', (req, res) => {
+  const { items, totalAmount } = req.body;
+
+  // Order processing logic (e.g., saving to database, processing payment)
+  if (items && totalAmount) {
+    // Simulate successful order placement
+    res.json({ success: true, message: 'Order placed successfully!' });
+  } else {
+    res.status(400).json({ success: false, message: 'Invalid order details' });
+  }
+});
+
+// Run the server
+app.listen(3000, () => {
+  console.log('Server is running on http://localhost:3000');
+});
+const mongoose = require('mongoose');
+
+// Order Schema
+const orderSchema = new mongoose.Schema({
+  items: [String],
+  totalAmount: Number,
+  userId: String,
+  paymentStatus: String
+});
+
+const Order = mongoose.model('Order', orderSchema);
+
+// Example: Save new order
+async function saveOrder(orderData) {
+  const order = new Order(orderData);
+  await order.save();
+  console.log('Order saved successfully!');
+}
+// Use Paytm's or Stripe's SDK/API
+// Example: Paytm setup
+
+const initiatePayment = (orderDetails) => {
+  // Implement Paytm Payment API
+  // After successful payment, confirm the order
+};
+// app.js
+let cart = [];
+let totalPrice = 0;
+
+// Function to add items to cart
+function addToCart(item, price) {
+    cart.push({ item, price });
+    totalPrice += price;
+    updateCart();
+}
+
+// Function to update cart display
+function updateCart() {
+    let cartItems = document.getElementById('cart-items');
+    cartItems.innerHTML = '';
+    cart.forEach(function (product) {
+        cartItems.innerHTML += `<p>${product.item}: ₹${product.price}</p>`;
+    });
+    document.getElementById('total-price').innerText = totalPrice;
+}
+
+// Function to handle checkout
+function checkout() {
+    if (cart.length === 0) {
+        alert("Your cart is empty.");
+    } else {
+        alert("Checkout successful! Total: ₹" + totalPrice);
+        cart = [];
+        totalPrice = 0;
+        updateCart();
+    }
+}
+/restaurant-website-backend
+│
+├── /models
+│   └── userModel.js          # User schema
+│
+├── /routes
+│   ├── authRoutes.js         # Authentication routes (register, login)
+│   └── menuRoutes.js         # Routes for menu items
+│
+├── server.js                 # Main server file
+├── config.js                 # Configuration (DB connection)
+└── .env                      # Environment variables
+const express = require('express');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const authRoutes = require('./routes/authRoutes');
+const menuRoutes = require('./routes/menuRoutes');
+
+// Load environment variables
+dotenv.config();
+
+const app = express();
+
+// Middleware
+app.use(express.json()); // Parse JSON bodies
+app.use(cors()); // Enable Cross-Origin Resource Sharing
+
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/menu', menuRoutes);
+
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log("Connected to MongoDB"))
+    .catch(err => console.log("Database connection error:", err));
+
+// Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+module.exports = {
+    MONGO_URI: process.env.MONGO_URI || 'your-mongodb-connection-string-here'
+};
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+
+const userSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+});
+
+// Hash the password before saving
+userSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) {
+        return next();
+    }
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+});
+
+// Method to check the password
+userSchema.methods.comparePassword = async function (candidatePassword) {
+    return await bcrypt.compare(candidatePassword, this.password);
+};
+
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const User = require('../models/userModel');
+
+const router = express.Router();
+
+// Register a new user
+router.post('/register', async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        let user = await User.findOne({ username });
+        if (user) {
+            return res.status(400).json({ msg: 'User already exists' });
+        }
+        user = new User({ username, password });
+        await user.save();
+        res.status(201).json({ msg: 'User registered successfully' });
+    } catch (err) {
+        res.status(500).json({ msg: 'Server error' });
+    }
+});
+
+// Login route
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        let user = await User.findOne({ username });
+        if (!user) {
+            return res.status(400).json({ msg: 'Invalid credentials' });
+        }
+
+        const isMatch = await user.comparePassword(password);
+        if (!isMatch) {
+            return res.status(400).json({ msg: 'Invalid credentials' });
+        }
+
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.json({ token });
+    } catch (err) {
+        res.status(500).json({ msg: 'Server error' });
+    }
+});
+
+module.exports = router;
+const express = require('express');
+const router = express.Router();
+
+// Example route to get menu items
+router.get('/', (req, res) => {
+    const menu = [
+        { name: 'Pizza', price: 10 },
+        { name: 'Pasta', price: 8 },
+        { name: 'Salad', price: 5 },
+    ];
+    res.json(menu);
+});
+
+module.exports = router;
+MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/restaurant-db?retryWrites=true&w=majority
+JWT_SECRET=your-secret-key
